@@ -1,4 +1,4 @@
-const APP_VERSION = "1";
+const APP_VERSION = "2";
 
 const words = [
   ["högljutt","loudly","Kap 1"], ["fnissa","giggle","Kap 1"], ["irriterad","annoyed","Kap 1"],
@@ -168,20 +168,47 @@ function submitQuizAnswer() {
   setTimeout(renderQuiz, 900);
 }
 
+// ---- Facit ----
+function renderFacit() {
+  const chapters = [...new Set(words.map(w => w[2]))];
+  const container = document.getElementById('facitList');
+  container.innerHTML = chapters.map(ch => {
+    const rows = words.filter(w => w[2] === ch).map(([sv, en]) =>
+      `<tr><td>${sv}</td><td>${en}</td></tr>`
+    ).join('');
+    return `
+      <div class="facitGroup">
+        <h3>${ch}</h3>
+        <table class="facitTable">
+          <thead><tr><th>Svenska</th><th>Engelska</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  }).join('');
+}
+
 // ---- Tabs ----
 function initTabs() {
-  document.getElementById('tabFlip').onclick = () => {
-    document.getElementById('tabFlip').classList.add('active');
-    document.getElementById('tabQuiz').classList.remove('active');
-    document.getElementById('flipView').style.display = 'block';
-    document.getElementById('quizView').style.display = 'none';
+  const views = {
+    flip: document.getElementById('flipView'),
+    quiz: document.getElementById('quizView'),
+    facit: document.getElementById('facitView'),
   };
-  document.getElementById('tabQuiz').onclick = () => {
-    document.getElementById('tabQuiz').classList.add('active');
-    document.getElementById('tabFlip').classList.remove('active');
-    document.getElementById('quizView').style.display = 'block';
-    document.getElementById('flipView').style.display = 'none';
+  const tabs = {
+    flip: document.getElementById('tabFlip'),
+    quiz: document.getElementById('tabQuiz'),
+    facit: document.getElementById('tabFacit'),
   };
+  function showTab(name) {
+    Object.keys(views).forEach(k => {
+      views[k].style.display = (k === name) ? 'block' : 'none';
+      tabs[k].classList.toggle('active', k === name);
+    });
+  }
+  tabs.flip.onclick = () => showTab('flip');
+  tabs.quiz.onclick = () => showTab('quiz');
+  tabs.facit.onclick = () => { renderFacit(); showTab('facit'); };
+
   document.getElementById('tabResetProgress').onclick = () => {
     if (!confirm("Nollställ allt sparat framsteg (kända ord + bästa resultat)?")) return;
     mastered = new Set();

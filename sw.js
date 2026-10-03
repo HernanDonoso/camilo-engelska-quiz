@@ -1,5 +1,5 @@
-const CACHE = "camilo-eng-quiz-v1";
-const SHELL = ["./", "./index.html", "./app.js?v=1", "./manifest.json", "./icon-192.png", "./icon-512.png"];
+const CACHE = "camilo-eng-quiz-v2";
+const SHELL = ["./", "./index.html", "./app.js?v=2", "./manifest.json", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

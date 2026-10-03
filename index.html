@@ -86,6 +86,12 @@
   .bar-fill { height: 100%; background: #4a6cf7; width: 0%; transition: width .3s; }
   .bestScore { margin-top: 14px; font-size: 0.9rem; color: #6b7280; text-align: center; }
   .footer { margin-top: 28px; font-size: 0.75rem; color: #9aa3b2; text-align: center; }
+  .facitGroup { margin-bottom: 18px; }
+  .facitGroup h3 { font-size: 1rem; margin: 0 0 8px 0; color: #374151; }
+  table.facitTable { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(30,36,51,0.05); }
+  table.facitTable th, table.facitTable td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #eef0f6; font-size: 0.95rem; }
+  table.facitTable th { background: #f3f5fb; color: #374151; font-weight: 600; font-size: 0.85rem; }
+  table.facitTable tr:last-child td { border-bottom: none; }
 </style>
 </head>
 <body>
@@ -96,6 +102,7 @@
     <div class="tabs">
       <button id="tabFlip" class="active">🔄 Flip-kort</button>
       <button id="tabQuiz">⌨️ Skriv-quiz</button>
+      <button id="tabFacit">📋 Facit</button>
     </div>
 
     <div id="flipView">
@@ -131,11 +138,15 @@
       <div class="bestScore" id="bestScore"></div>
     </div>
 
+    <div id="facitView" style="display:none; width:100%;">
+      <div id="facitList"></div>
+    </div>
+
     <div class="footer">
       <button id="tabResetProgress" style="padding:8px 12px; font-size:0.8rem;">Nollställ sparat framsteg</button>
     </div>
   </div>
 
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
